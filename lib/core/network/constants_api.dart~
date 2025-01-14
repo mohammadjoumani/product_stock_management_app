@@ -1,0 +1,65 @@
+class ConstantsApi {
+  // static String baseUrl = "";
+
+  //Api Shared
+  static String uploadFileUrl = "upload/patient";
+
+  //Api Auth
+  static String checkSehatechIdUrl = "patient/auth/check";
+  static String loginUrl = "patient/auth/login";
+  static String logoutUrl = "patient/auth/logout";
+  static String registerUrl = "patient/auth";
+  static String checkDateOfBirthUrl = "patient/auth/dateofbirth";
+  static String generateOtpBySehatechIdUrl = "patient/auth/otp";
+  static String validateOtpBySehatechIdUrl = "patient/auth/otp/validate";
+  static String generateOtpByPhoneNumberUrl = "patient/auth/otp/send";
+  static String validateOtpByPhoneNumberUrl = "patient/auth/otp/verify";
+  static String updatePhoneNumberUrl = "patient/phone";
+  static String getCompleteProfileUrl = "patient/medicalprofile";
+  static String upsertCompleteProfileUrl = "patient/medicalprofile";
+  static String refreshTokenUrl = "patient/auth/refreshtoken";
+
+  //Api Notifications
+  static String getNotificationsUrl = "patient/notifications";
+
+  //Api Approvals
+  static String getAllApprovalsUrl = "patient/policy/approvals";
+  static String getApprovalDetailsUrl = "patient/approvals";
+  static String getApprovalDetailsPdfUrl = "claim/patient/printApproval";
+
+  //Api Claims
+  static String getClaimsUrl = "patient/policy/claims";
+  static String getClaimDetailsUrl = "patient/policy/claim/single";
+  static String addClaimRatingUrl = "patient/policy/claims/rating";
+  static String updateClaimRatingUrl = "patient/policy/claims/rating";
+  static String deleteClaimRatingUrl = "patient/policy/claims/rating";
+
+  //Api Reimbursements
+  static String createReimbursementUrl = "patient/reimbursement";
+  static String getReimbursementsUrl = "patient/reimbursement";
+
+  //Api Networks
+  static String getNetworksUrl = "patient/network/search";
+  static String getGovernorates = "provider/governorates";
+  static String getSpecializations = "provider/specializations";
+
+  // Api Policy
+  static String getPolicyUrl = "patient/policy/details";
+
+  //Api Drug alarm
+  static String getDrugAlarmsUrl = "patient/medication/reminder";
+  static String addDrugAlarmUrl = "patient/medication/reminder";
+  static String deleteDrugAlarmUrl = "patient/medication/reminder";
+  static String toggleDrugAlarmUrl = "patient/medication/reminder/active";
+
+  //Api Bank
+  static String getAllBanksUrl = "patient/allbanks";
+  static String getBankAccountsUrl = "patient/bank";
+  static String addBankAccountUrl = "patient/bank";
+  static String deleteBankAccountUrl = "patient/bank";
+  static String setActiveBankAccountUrl = "patient/bank/active";
+
+  // Api Review
+  static String getReviewUrl = "patient/review";
+  static String setReviewUrl = "patient/review";
+}

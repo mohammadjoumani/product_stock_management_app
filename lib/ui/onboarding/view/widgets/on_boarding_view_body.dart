@@ -1,0 +1,92 @@
+import 'package:flutter/material.dart';
+
+import 'page_1.dart';
+import 'page_2.dart';
+import 'page_3.dart';
+
+class OnBoardingViewBody extends StatefulWidget {
+  const OnBoardingViewBody({super.key});
+
+  @override
+  State<OnBoardingViewBody> createState() => _OnBoardingViewBodyState();
+}
+
+class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
+  final PageController _pageController = PageController();
+  // final AppPreferences _appPref = instance<AppPreferences>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          child: PageView.builder(
+            controller: _pageController,
+            scrollDirection: Axis.horizontal,
+            onPageChanged: (value) {
+              // BlocProvider.of<OnBoardingBloc>(context).add(ChangeIndexEvent(value));
+            },
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              return index == 0
+                  ? const PageOne()
+                  : index == 1
+                      ? const PageTwo()
+                      : const PageThree();
+            },
+          ),
+        ),
+
+        // Button
+        // Padding(
+        //   padding: const EdgeInsets.all(AppPadding.p16),
+        //   child: BlocBuilder<OnBoardingBloc, OnBoardingState>(
+        //     builder: (context, state) {
+        //       return Column(
+        //         children: [
+        //           Row(
+        //             mainAxisAlignment: MainAxisAlignment.center,
+        //             children: [
+        //               DotWidget(currentIndex: state.currentIndex, index: 0),
+        //               DotWidget(currentIndex: state.currentIndex, index: 1),
+        //               DotWidget(currentIndex: state.currentIndex, index: 2),
+        //             ],
+        //           ),
+        //           const Sh5(),
+        //           BlocBuilder<OnBoardingBloc, OnBoardingState>(
+        //             builder: (context, state) {
+        //               return GenericButton(
+        //                 onPressed: () => _onPressedNextButton(context, state.currentIndex),
+        //                 label: state.currentIndex == 0
+        //                     ? AppStrings.strGetStarted.tr(context)
+        //                     : state.currentIndex == 1
+        //                         ? AppStrings.strNext.tr(context)
+        //                         : AppStrings.strLogin.tr(context),
+        //               );
+        //             },
+        //           ),
+        //         ],
+        //       );
+        //     },
+        //   ),
+        // ),
+      ],
+    );
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  // _onPressedNextButton(BuildContext context, int currentIndex) {
+  //   if (currentIndex < 2) {
+  //     _pageController.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.bounceInOut);
+  //     BlocProvider.of<OnBoardingBloc>(context).add(ChangeIndexEvent(currentIndex + 1));
+  //     return;
+  //   }
+  //   _appPref.setOnBoardingScreenViewed();
+  //   Navigator.pushReplacementNamed(context, Routes.loginRoute);
+  // }
+}

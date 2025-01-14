@@ -1,0 +1,76 @@
+import 'package:flutter/material.dart';
+import 'package:product_stock_management_app/ui/onboarding/view/on_boarding_view.dart';
+import 'package:product_stock_management_app/ui/splash/view/splash_view.dart';
+import 'app_page.dart';
+
+class Routes {
+  static const String splashRoute = "/";
+  static const String onboardingRoute = "/onboarding";
+  static const String homeRoute = "/login";
+}
+
+Map<String, dynamic> _arguments = {};
+
+dynamic getArgs(String key) => _arguments[key];
+
+void setArgs(String key, dynamic value) => _arguments[key] = value;
+
+class RouteGenerator {
+  static final List<AppPage> appPages = [
+    AppPage(
+      route: Routes.splashRoute,
+      screen: const SplashView(),
+      // binding: SplashBinding(),
+    ),
+    AppPage(
+      route: Routes.onboardingRoute,
+      screen: const OnBoardingView(),
+      // binding: OnBoardingBinding(),
+    ),
+  ];
+
+  static Route<dynamic> getRoute(RouteSettings settings) {
+    for (var page in appPages) {
+      if (page.route == settings.name) {
+        return page.generateRoute(settings);
+      }
+    }
+    return unDefinedRoute();
+  }
+
+  static Route<dynamic> unDefinedRoute() {
+    return MaterialPageRoute(
+      builder: (context) => Scaffold(
+        appBar: AppBar(
+          title: const Text("Not found data"),
+        ),
+        body: const Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "Not found data",
+                style: TextStyle(
+                  color: Color(0xFFA0A0A0),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  height: 0,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+extension NavigationExtension on BuildContext {
+  void navigateTo(String routeName, {Object? arguments}) {
+    Navigator.pushNamed(
+      this,
+      routeName,
+      arguments: arguments,
+    );
+  }
+}
