@@ -85,7 +85,7 @@ class _OnBoardingViewBodyState extends ConsumerState<OnBoardingViewBody> {
     final appPref = ref.read(appPreferencesProvider.future);
     appPref.then((value) {
       value.setOnBoardingScreenViewed();
-      Navigator.pushReplacementNamed(context, Routes.homeRoute);
+      Navigator.pushReplacementNamed(context, Routes.productsRoute);
     });
   }
 }

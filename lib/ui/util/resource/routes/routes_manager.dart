@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:product_stock_management_app/ui/onboarding/view/on_boarding_view.dart';
+import 'package:product_stock_management_app/ui/products/view/products_view.dart';
 import 'package:product_stock_management_app/ui/splash/view/splash_view.dart';
 
 import 'app_page.dart';
@@ -7,7 +8,8 @@ import 'app_page.dart';
 class Routes {
   static const String splashRoute = "/";
   static const String onboardingRoute = "/onboarding";
-  static const String homeRoute = "/home";
+  static const String productsRoute = "/products";
+  static const String addProductRoute = "/add_product";
 }
 
 Map<String, dynamic> _arguments = {};
@@ -29,9 +31,12 @@ class RouteGenerator {
       // binding: OnBoardingBinding(),
     ),
     AppPage(
-      route: Routes.homeRoute,
+      route: Routes.productsRoute,
+      screen: const ProductsView(),
+    ),
+    AppPage(
+      route: Routes.addProductRoute,
       screen: const Scaffold(),
-      // binding: OnBoardingBinding(),
     ),
   ];
 

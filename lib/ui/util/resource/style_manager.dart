@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'color/color_manager.dart';
 import 'font_manager.dart';
 
 abstract class Styles {

@@ -30,6 +30,6 @@ class OnBoardingView extends StatelessWidget {
   }
 
   _onPressedSkipButton(BuildContext context) {
-    Navigator.pushReplacementNamed(context, Routes.homeRoute);
+    Navigator.pushReplacementNamed(context, Routes.productsRoute);
   }
 }

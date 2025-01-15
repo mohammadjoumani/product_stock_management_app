@@ -80,7 +80,7 @@ class _SplashViewBodyState extends ConsumerState<SplashViewBody> with SingleTick
     final appPref = ref.read(appPreferencesProvider.future);
     appPref.then((value) {
       if (value.isOnBoardingScreenViewed()) {
-        Navigator.pushReplacementNamed(context, Routes.homeRoute);
+        Navigator.pushReplacementNamed(context, Routes.productsRoute);
       } else {
         Navigator.pushReplacementNamed(context, Routes.onboardingRoute);
       }

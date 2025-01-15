@@ -43,7 +43,7 @@ class AppColor {
       ThemeApp.light: 0,
       ThemeApp.dark: 1,
     };
-    index = themeMap[ThemeApp.dark] ?? 0;
+    index = themeMap[ThemeApp.light] ?? 0;
   }
 
   Color get getColorPrimary => _mainColors[index].colorPrimary;

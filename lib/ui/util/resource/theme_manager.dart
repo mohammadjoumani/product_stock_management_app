@@ -15,7 +15,7 @@ class ThemeAppManager implements MainThemeApp {
   @override
   ThemeData getThemeData({required String fontFamily}) {
     return ThemeData(
-      useMaterial3: true,
+      useMaterial3: false,
       primaryColor: colorPrimary,
       // cardColor: Palette.colorCardLight,
       scaffoldBackgroundColor: colorBackgroundScaffold,
@@ -84,12 +84,12 @@ class ThemeAppManager implements MainThemeApp {
       appBarTheme: AppBarTheme(
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(color: colorOnBackgroundScaffold, size: AppSize.s24),
-        actionsIconTheme: IconThemeData(color: colorOnBackgroundScaffold, size: AppSize.s24),
+        backgroundColor: colorPrimary,
+        iconTheme: IconThemeData(color: colorOnPrimary, size: AppSize.s24),
+        actionsIconTheme: IconThemeData(color: colorOnPrimary, size: AppSize.s24),
         titleSpacing: AppPadding.p16,
         titleTextStyle: Styles.getSemiBoldStyle(
-          color: colorOnBackgroundScaffold,
+          color: colorOnPrimary,
           fontSize: FontSize.s16,
         ).copyWith(fontFamily: fontFamily),
       ),
