@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:product_stock_management_app/ui/add_product/view/add_product_view.dart';
 import 'package:product_stock_management_app/ui/onboarding/view/on_boarding_view.dart';
 import 'package:product_stock_management_app/ui/products/view/products_view.dart';
 import 'package:product_stock_management_app/ui/splash/view/splash_view.dart';
@@ -36,7 +37,7 @@ class RouteGenerator {
     ),
     AppPage(
       route: Routes.addProductRoute,
-      screen: const Scaffold(),
+      screen: const AddProductView(),
     ),
   ];
 

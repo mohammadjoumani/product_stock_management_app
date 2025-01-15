@@ -57,8 +57,8 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       style: context.isRtl
-          ? Styles.getRegularStyle(color: colorPrimary)
-          : Styles.getRegularStyle(color: colorHintText).copyWith(
+          ? Styles.getRegularStyle(color: colorOnBackgroundCard)
+          : Styles.getRegularStyle(color: colorOnBackgroundCard).copyWith(
               height: 1,
               letterSpacing: 0.4,
             ),
