@@ -7,7 +7,7 @@ import 'app_page.dart';
 class Routes {
   static const String splashRoute = "/";
   static const String onboardingRoute = "/onboarding";
-  static const String homeRoute = "/login";
+  static const String homeRoute = "/home";
 }
 
 Map<String, dynamic> _arguments = {};
@@ -26,6 +26,11 @@ class RouteGenerator {
     AppPage(
       route: Routes.onboardingRoute,
       screen: const OnBoardingView(),
+      // binding: OnBoardingBinding(),
+    ),
+    AppPage(
+      route: Routes.homeRoute,
+      screen: const Scaffold(),
       // binding: OnBoardingBinding(),
     ),
   ];

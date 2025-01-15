@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:product_stock_management_app/core/services/app_preferences.dart';
 import 'package:product_stock_management_app/ui/util/resource/color/color_manager.dart';
 import 'package:product_stock_management_app/ui/util/resource/routes/routes_manager.dart';
 import 'package:product_stock_management_app/ui/util/resource/style_manager.dart';
 import 'package:product_stock_management_app/ui/util/resource/values_manager.dart';
 
-class SplashViewBody extends StatefulWidget {
+class SplashViewBody extends ConsumerStatefulWidget {
   const SplashViewBody({super.key});
 
   @override
-  State<SplashViewBody> createState() => _SplashViewBodyState();
+  ConsumerState<SplashViewBody> createState() => _SplashViewBodyState();
 }
 
-class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProviderStateMixin {
+class _SplashViewBodyState extends ConsumerState<SplashViewBody> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -75,13 +77,13 @@ class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvid
   }
 
   _goNext() {
-    Navigator.pushReplacementNamed(context, Routes.onboardingRoute);
-    // if (_appPref.isUserLogged()) {
-    //   _checkLoginCase();
-    // } else if (_appPref.isOnBoardingScreenViewed()) {
-    //   Navigator.pushReplacementNamed(context, Routes.loginRoute);
-    // } else {
-    //   Navigator.pushReplacementNamed(context, Routes.onboardingRoute);
-    // }
+    final appPref = ref.read(appPreferencesProvider.future);
+    appPref.then((value) {
+      if (value.isOnBoardingScreenViewed()) {
+        Navigator.pushReplacementNamed(context, Routes.homeRoute);
+      } else {
+        Navigator.pushReplacementNamed(context, Routes.onboardingRoute);
+      }
+    });
   }
 }

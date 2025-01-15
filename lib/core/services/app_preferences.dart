@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:product_stock_management_app/ui/util/resource/language_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,6 +9,13 @@ String keyFontSize = "KEY_FONT_SIZE";
 
 String keyIsUserLoggedIn = "KEY_IS_USER_LOGGED_IN";
 String keyOnBoardingScreenViewed = "KEY_ON_BOARDING_SCREEN_VIEWED";
+
+final appPreferencesProvider = FutureProvider.autoDispose<AppPreferences>(
+  (ref) async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    return AppPreferences(sharedPreferences);
+  },
+);
 
 class AppPreferences {
   final SharedPreferences _sharedPreferences;

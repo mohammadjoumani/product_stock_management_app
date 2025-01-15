@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'ui/main_app/view/main_app.dart';
 
 Future<void> main() async {
@@ -15,5 +16,5 @@ Future<void> main() async {
       statusBarIconBrightness: Brightness.dark,
     ),
   );
-  runApp(const MainApp());
+  runApp(const ProviderScope(child: MainApp()));
 }

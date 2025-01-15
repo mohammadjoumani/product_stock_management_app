@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:product_stock_management_app/core/services/app_preferences.dart';
+import 'package:product_stock_management_app/core/util/extension/widget_extension.dart';
+import 'package:product_stock_management_app/ui/onboarding/viewmodel/current_index_provider.dart';
+import 'package:product_stock_management_app/ui/util/resource/routes/routes_manager.dart';
+import 'package:product_stock_management_app/ui/util/resource/values_manager.dart';
+import 'package:product_stock_management_app/ui/util/widgets/custom_button.dart';
+import 'package:product_stock_management_app/ui/util/widgets/margin.dart';
 
+import 'dot_widgets.dart';
 import 'page_1.dart';
 import 'page_2.dart';
 import 'page_3.dart';
 
-class OnBoardingViewBody extends StatefulWidget {
+class OnBoardingViewBody extends ConsumerStatefulWidget {
   const OnBoardingViewBody({super.key});
 
   @override
-  State<OnBoardingViewBody> createState() => _OnBoardingViewBodyState();
+  ConsumerState<OnBoardingViewBody> createState() => _OnBoardingViewBodyState();
 }
 
-class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
+class _OnBoardingViewBodyState extends ConsumerState<OnBoardingViewBody> {
   final PageController _pageController = PageController();
-  // final AppPreferences _appPref = instance<AppPreferences>();
 
   @override
   Widget build(BuildContext context) {
+    final currentIndex = ref.watch(indexOnBoardingProvider);
     return Column(
       children: [
         Expanded(
@@ -24,7 +33,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
             controller: _pageController,
             scrollDirection: Axis.horizontal,
             onPageChanged: (value) {
-              // BlocProvider.of<OnBoardingBloc>(context).add(ChangeIndexEvent(value));
+              ref.read(indexOnBoardingProvider.notifier).state = value;
             },
             itemCount: 3,
             itemBuilder: (context, index) {
@@ -36,42 +45,29 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
             },
           ),
         ),
-
-        // Button
-        // Padding(
-        //   padding: const EdgeInsets.all(AppPadding.p16),
-        //   child: BlocBuilder<OnBoardingBloc, OnBoardingState>(
-        //     builder: (context, state) {
-        //       return Column(
-        //         children: [
-        //           Row(
-        //             mainAxisAlignment: MainAxisAlignment.center,
-        //             children: [
-        //               DotWidget(currentIndex: state.currentIndex, index: 0),
-        //               DotWidget(currentIndex: state.currentIndex, index: 1),
-        //               DotWidget(currentIndex: state.currentIndex, index: 2),
-        //             ],
-        //           ),
-        //           const Sh5(),
-        //           BlocBuilder<OnBoardingBloc, OnBoardingState>(
-        //             builder: (context, state) {
-        //               return GenericButton(
-        //                 onPressed: () => _onPressedNextButton(context, state.currentIndex),
-        //                 label: state.currentIndex == 0
-        //                     ? AppStrings.strGetStarted.tr(context)
-        //                     : state.currentIndex == 1
-        //                         ? AppStrings.strNext.tr(context)
-        //                         : AppStrings.strLogin.tr(context),
-        //               );
-        //             },
-        //           ),
-        //         ],
-        //       );
-        //     },
-        //   ),
-        // ),
+        Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                DotWidget(currentIndex: currentIndex, index: 0),
+                DotWidget(currentIndex: currentIndex, index: 1),
+                DotWidget(currentIndex: currentIndex, index: 2),
+              ],
+            ),
+            const Sh5(),
+            CustomButton(
+              onPressed: () => _onPressedNextButton(context, currentIndex),
+              label: currentIndex == 0
+                  ? "Get Start"
+                  : currentIndex == 1
+                      ? "Next"
+                      : "Go to home",
+            )
+          ],
+        ),
       ],
-    );
+    ).marginSymmetric(horizontal: AppPadding.p16, vertical: AppPadding.p16);
   }
 
   @override
@@ -80,13 +76,16 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
     super.dispose();
   }
 
-  // _onPressedNextButton(BuildContext context, int currentIndex) {
-  //   if (currentIndex < 2) {
-  //     _pageController.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.bounceInOut);
-  //     BlocProvider.of<OnBoardingBloc>(context).add(ChangeIndexEvent(currentIndex + 1));
-  //     return;
-  //   }
-  //   _appPref.setOnBoardingScreenViewed();
-  //   Navigator.pushReplacementNamed(context, Routes.loginRoute);
-  // }
+  _onPressedNextButton(BuildContext context, int currentIndex) {
+    if (currentIndex < 2) {
+      _pageController.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.bounceInOut);
+      ref.read(indexOnBoardingProvider.notifier).state = currentIndex + 1;
+      return;
+    }
+    final appPref = ref.read(appPreferencesProvider.future);
+    appPref.then((value) {
+      value.setOnBoardingScreenViewed();
+      Navigator.pushReplacementNamed(context, Routes.homeRoute);
+    });
+  }
 }
