@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:product_stock_management_app/core/util/extension/context_extension.dart';
-import 'package:product_stock_management_app/model/product.dart';
 import 'package:product_stock_management_app/ui/products/viewmodel/products_viewmodel.dart';
 import 'package:product_stock_management_app/ui/util/resource/assets_manager.dart';
 import 'package:product_stock_management_app/ui/util/resource/color/color_manager.dart';

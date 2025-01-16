@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:product_stock_management_app/core/services/database_helper.dart';
-import 'package:product_stock_management_app/model/product.dart';
 import 'package:product_stock_management_app/model/transaction.dart';
 
 final transactionRepositoryProvider = Provider.autoDispose<TransactionRepository>(
@@ -56,7 +55,6 @@ class TransactionRepository {
       final result = await db.rawQuery(query);
       return Right(Transaction.fromJsonList(result));
     } catch (error) {
-      print("Error $error");
       return const Left('Something went wrong');
     }
   }

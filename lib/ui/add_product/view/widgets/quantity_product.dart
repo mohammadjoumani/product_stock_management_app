@@ -26,6 +26,7 @@ class QuantityProduct extends ConsumerWidget {
         CustomTextField(
           hintText: 'Enter quantity here',
           keyboardType: TextInputType.number,
+          textInputAction: TextInputAction.done,
           inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
           errorText: errorText.isEmpty ? null : errorText,
           onChanged: (value) => ref.read(addProductViewmodelProvider.notifier).changeQuantity(value),

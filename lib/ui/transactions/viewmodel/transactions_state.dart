@@ -1,4 +1,3 @@
-import 'package:product_stock_management_app/model/product.dart';
 import 'package:product_stock_management_app/model/transaction.dart';
 import 'package:product_stock_management_app/ui/util/state_render/generic_data_state.dart';
 

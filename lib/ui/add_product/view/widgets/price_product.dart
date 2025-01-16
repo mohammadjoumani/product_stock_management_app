@@ -26,6 +26,7 @@ class PriceProduct extends ConsumerWidget {
         CustomTextField(
           hintText: 'Enter price here',
           keyboardType: TextInputType.number,
+          textInputAction: TextInputAction.next,
           inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
           errorText: errorText.isEmpty ? null : errorText,
           onChanged: (value) => ref.read(addProductViewmodelProvider.notifier).changePrice(value),

@@ -24,6 +24,7 @@ class NameProduct extends ConsumerWidget {
         ).marginOnly(bottom: AppPadding.p8),
         CustomTextField(
           hintText: 'Enter name here',
+          textInputAction: TextInputAction.next,
           errorText: errorText.isEmpty ? null : errorText,
           onChanged: (value) => ref.read(addProductViewmodelProvider.notifier).changeName(value),
         ),

@@ -19,6 +19,7 @@ class HeaderTableTransaction extends StatelessWidget {
           Expanded(child: _itemCell('Name')),
           Expanded(child: _itemCell('Quantity')),
           Expanded(child: _itemCell('Date')),
+          Expanded(child: _itemCell('Time')),
         ],
       ),
     );
