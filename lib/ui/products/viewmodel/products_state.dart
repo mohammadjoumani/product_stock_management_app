@@ -27,15 +27,18 @@ class ProductsState {
     ProductStatus? productStatus,
     num? minPrice,
     num? maxPrice,
+    bool resetProductStatus = false,
+    bool resetMinPrice = false,
+    bool resetMaxPrice = false,
     String? errorMessage,
   }) {
     return ProductsState(
       getProductsDataState: getProductsDataState ?? this.getProductsDataState,
       increaseOrDecreaseQuantityDataState: increaseOrDecreaseQuantityDataState ?? this.increaseOrDecreaseQuantityDataState,
       products: products ?? this.products,
-      productStatus: productStatus ?? this.productStatus,
-      minPrice: minPrice ?? this.minPrice,
-      maxPrice: maxPrice ?? this.maxPrice,
+      productStatus: resetProductStatus ? null : (productStatus ?? this.productStatus),
+      minPrice: resetMinPrice ? null : (minPrice ?? this.minPrice),
+      maxPrice: resetMaxPrice ? null : (maxPrice ?? this.maxPrice),
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }

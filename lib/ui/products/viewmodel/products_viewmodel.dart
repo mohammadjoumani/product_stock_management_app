@@ -51,18 +51,21 @@ class ProductsViewmodel extends AutoDisposeNotifier<ProductsState> {
   void changeProductStatus(ProductStatus? productStatus) {
     state = state.copyWith(
       productStatus: productStatus,
+      resetProductStatus: productStatus == null,
     );
   }
 
   void changeMinPrice(num? value) {
     state = state.copyWith(
       minPrice: value,
+      resetMinPrice: value == null,
     );
   }
 
   void changeMaxPrice(num? value) {
     state = state.copyWith(
       maxPrice: value,
+      resetMaxPrice: value == null,
     );
   }
 
