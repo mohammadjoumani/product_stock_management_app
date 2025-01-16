@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:product_stock_management_app/ui/util/resource/values_manager.dart';
-import 'package:product_stock_management_app/ui/util/widgets/custom_button.dart';
+import 'package:product_stock_management_app/ui/add_product/view/widgets/add_product_button.dart';
 import 'package:product_stock_management_app/ui/util/widgets/custom_scaffold.dart';
 
-import 'widgets/add_product_view.dart';
+import 'widgets/add_product_view_body.dart';
 
 class AddProductView extends StatelessWidget {
   const AddProductView({super.key});
@@ -21,15 +20,7 @@ class AddProductView extends StatelessWidget {
         title: const Text("Add Product"),
       ),
       body: const AddProductViewBody(),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(AppPadding.p16),
-        child: CustomButton(
-          label: 'Add product',
-          onPressed: () => _onPressedAddProductButton(context),
-        ),
-      ),
+      bottomNavigationBar: const AddProductButton(),
     );
   }
-
-  _onPressedAddProductButton(BuildContext context) {}
 }

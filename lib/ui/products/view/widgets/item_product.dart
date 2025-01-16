@@ -21,7 +21,7 @@ class ItemProduct extends StatelessWidget {
             Expanded(child: _itemCell(product.id.toString())),
             Expanded(child: _itemCell(product.name)),
             Expanded(child: _itemCell(product.price.toString())),
-            Expanded(child: _itemCell('${product.quantity} ${product.unit}')),
+            Expanded(child: _itemCell(product.quantity.toString())),
             Expanded(child: _itemCell(_stockText(product.status))),
           ],
         ),

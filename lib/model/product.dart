@@ -1,19 +1,25 @@
 class Product {
-  final int id;
+  final int? id;
   final String name;
   final num price;
   final num quantity;
-  final String unit;
   final ProductStatus status;
 
   Product({
-    required this.id,
+    this.id,
     required this.name,
     required this.price,
     required this.quantity,
-    required this.unit,
-    required this.status,
+    this.status = ProductStatus.lowStock,
   });
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['price'] = price;
+    data['quantity'] = quantity;
+    return data;
+  }
 }
 
 enum ProductStatus { inStock, outStock, lowStock }
