@@ -3,6 +3,7 @@ import 'package:product_stock_management_app/ui/add_product/view/add_product_vie
 import 'package:product_stock_management_app/ui/onboarding/view/on_boarding_view.dart';
 import 'package:product_stock_management_app/ui/products/view/products_view.dart';
 import 'package:product_stock_management_app/ui/splash/view/splash_view.dart';
+import 'package:product_stock_management_app/ui/transactions/view/transactions_view.dart';
 
 import 'app_page.dart';
 
@@ -11,6 +12,7 @@ class Routes {
   static const String onboardingRoute = "/onboarding";
   static const String productsRoute = "/products";
   static const String addProductRoute = "/add_product";
+  static const String transactionsRoute = "/transactions";
 }
 
 Map<String, dynamic> _arguments = {};
@@ -38,6 +40,10 @@ class RouteGenerator {
     AppPage(
       route: Routes.addProductRoute,
       screen: const AddProductView(),
+    ),
+    AppPage(
+      route: Routes.transactionsRoute,
+      screen: const TransactionsView(),
     ),
   ];
 

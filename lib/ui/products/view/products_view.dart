@@ -21,10 +21,8 @@ class ProductsView extends StatelessWidget {
         title: const Text("Products"),
         actions: [
           IconButton(
-            icon: const Icon(Icons.sunny),
-            onPressed: () {
-              // Navigator.of(context).pop();
-            },
+            icon: const Icon(Icons.archive_rounded),
+            onPressed: () => _onPressedTransactionButton(context),
           ),
         ],
       ),
@@ -39,5 +37,9 @@ class ProductsView extends StatelessWidget {
 
   _onPressedAddButton(BuildContext context) {
     Navigator.pushNamed(context, Routes.addProductRoute);
+  }
+
+  _onPressedTransactionButton(BuildContext context) {
+    Navigator.pushNamed(context, Routes.transactionsRoute);
   }
 }

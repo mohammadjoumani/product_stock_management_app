@@ -13,6 +13,7 @@ class OnBoardingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         leadingWidth: 200,
         actions: [
           TextButton(
@@ -20,7 +21,7 @@ class OnBoardingView extends StatelessWidget {
             child: Text(
               "Skip",
               textAlign: TextAlign.center,
-              style: Styles.getSemiBoldStyle(color: colorOnPrimary),
+              style: Styles.getSemiBoldStyle(color: colorOnBackgroundScaffold),
             ),
           ),
         ],
