@@ -25,10 +25,42 @@ class ProductRepository {
     }
   }
 
-  Future<Either<String, List<Product>>> getAllProducts() async {
+  Future<Either<String, List<Product>>> getAllProducts({
+    ProductStatus? productStatus,
+    num? minPrice,
+    num? maxPrice,
+  }) async {
     try {
       final db = await _dbHelper.database;
-      final result = await db.query(DatabaseHelper.productTable);
+      String query = "SELECT * FROM ${DatabaseHelper.productTable}";
+      List<dynamic> arguments = [];
+      if (productStatus != null) {
+        switch (productStatus) {
+          case ProductStatus.inStock:
+            query += " WHERE quantity > ?";
+            arguments.add(15);
+            break;
+          case ProductStatus.lowStock:
+            query += " WHERE quantity > ? AND quantity <= ?";
+            arguments.add(0);
+            arguments.add(15);
+            break;
+          case ProductStatus.outStock:
+            query += " WHERE quantity = ?";
+            arguments.add(0);
+            break;
+        }
+      }
+      if (minPrice != null && maxPrice != null) {
+        if (productStatus != null) {
+          query += " AND price BETWEEN ? AND ?";
+        } else {
+          query += " WHERE price BETWEEN ? AND ?";
+        }
+        arguments.add(minPrice);
+        arguments.add(maxPrice);
+      }
+      final result = await db.rawQuery(query, arguments);
       return Right(Product.fromJsonList(result));
     } catch (error) {
       return const Left('Something went wrong');

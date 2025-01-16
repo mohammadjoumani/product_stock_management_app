@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:product_stock_management_app/model/product.dart';
+import 'package:product_stock_management_app/ui/products/view/transaction_dialog.dart';
 import 'package:product_stock_management_app/ui/util/resource/color/color_manager.dart';
 import 'package:product_stock_management_app/ui/util/resource/style_manager.dart';
 import 'package:product_stock_management_app/ui/util/resource/values_manager.dart';
@@ -12,7 +13,7 @@ class ItemProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => _showTransactionDialog(context),
       child: Container(
         color: _stockBackgroundColor(),
         padding: const EdgeInsets.all(AppPadding.p6),
@@ -73,5 +74,12 @@ class ItemProduct extends StatelessWidget {
       case ProductStatus.lowStock:
         return colorOnError;
     }
+  }
+
+  _showTransactionDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) => TransactionDialog(product),
+    );
   }
 }

@@ -19,18 +19,18 @@ class ItemTransaction extends StatelessWidget {
           children: [
             Expanded(flex: 1, child: _itemCell(transaction.id.toString())),
             Expanded(flex: 2, child: _itemCell(_getActionType)),
-            Expanded(flex: 2, child: _itemCell(transaction.productName)),
+            Expanded(flex: 2, child: _itemCell(transaction.productName ?? '')),
             Expanded(flex: 1, child: _itemCell(transaction.quantityChange.toString())),
-            Expanded(flex: 2, child: _itemCell(transaction.date)),
+            Expanded(flex: 2, child: _itemCell(transaction.date ?? '')),
           ],
         ),
       ),
     );
   }
 
-  String get _getActionType => transaction.quantityChange >= 0 ? 'Increase' : 'Decrease';
+  String get _getActionType => (transaction.quantityChange ?? 0) >= 0 ? 'Increase' : 'Decrease';
 
-  Color get _getTextColor => transaction.quantityChange >= 0 ? colorOnBackgroundScaffold : colorError;
+  Color get _getTextColor => (transaction.quantityChange ?? 0) >= 0 ? colorOnBackgroundScaffold : colorError;
 
   Widget _itemCell(String value) {
     return Padding(

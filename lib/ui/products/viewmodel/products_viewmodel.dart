@@ -1,5 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:product_stock_management_app/model/product.dart';
+import 'package:product_stock_management_app/model/transaction.dart';
 import 'package:product_stock_management_app/repository/product_repository.dart';
+import 'package:product_stock_management_app/repository/transaction_repository.dart';
 import 'package:product_stock_management_app/ui/util/state_render/generic_data_state.dart';
 
 import 'products_state.dart';
@@ -25,7 +28,11 @@ class ProductsViewmodel extends AutoDisposeNotifier<ProductsState> {
     state = state.copyWith(
       getProductsDataState: GenericDataState.loading,
     );
-    final result = await productRepository.getAllProducts();
+    final result = await productRepository.getAllProducts(
+      productStatus: state.productStatus,
+      minPrice: state.minPrice,
+      maxPrice: state.maxPrice,
+    );
     result.fold(
       (l) => state = state.copyWith(
         getProductsDataState: GenericDataState.failure,
@@ -39,5 +46,47 @@ class ProductsViewmodel extends AutoDisposeNotifier<ProductsState> {
         }
       },
     );
+  }
+
+  void changeProductStatus(ProductStatus? productStatus) {
+    state = state.copyWith(
+      productStatus: productStatus,
+    );
+  }
+
+  void changeMinPrice(num? value) {
+    state = state.copyWith(
+      minPrice: value,
+    );
+  }
+
+  void changeMaxPrice(num? value) {
+    state = state.copyWith(
+      maxPrice: value,
+    );
+  }
+
+  increaseDecreaseQuantityToProduct(int productId, num quantity) async {
+    final transactionRepository = ref.read(transactionRepositoryProvider);
+    state = state.copyWith(
+      increaseOrDecreaseQuantityDataState: GenericDataState.loading,
+    );
+    final result = await transactionRepository.addTransaction(
+      Transaction(
+        productId: productId,
+        quantityChange: quantity,
+        date: DateTime.now().toString(),
+      ),
+    );
+    result.fold(
+        (l) => state = state.copyWith(
+              increaseOrDecreaseQuantityDataState: GenericDataState.failure,
+              errorMessage: l,
+            ), (r) {
+      getProducts();
+      state = state.copyWith(
+        increaseOrDecreaseQuantityDataState: GenericDataState.success,
+      );
+    });
   }
 }

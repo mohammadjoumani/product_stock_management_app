@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:product_stock_management_app/ui/products/view/transaction_dialog.dart';
 import 'package:product_stock_management_app/ui/products/viewmodel/products_viewmodel.dart';
 import 'package:product_stock_management_app/ui/util/resource/color/color_manager.dart';
 import 'package:product_stock_management_app/ui/util/resource/routes/routes_manager.dart';
 import 'package:product_stock_management_app/ui/util/widgets/custom_scaffold.dart';
 
+import 'products_filter_bottom_sheet.dart';
 import 'widgets/products_view_body.dart';
 
 class ProductsView extends ConsumerWidget {
@@ -16,9 +18,7 @@ class ProductsView extends ConsumerWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.filter_alt),
-          onPressed: () {
-            // Navigator.of(context).pop();
-          },
+          onPressed: () => _onPressedFilterButton(context),
         ),
         title: const Text("Products"),
         actions: [
@@ -46,5 +46,14 @@ class ProductsView extends ConsumerWidget {
 
   _onPressedTransactionButton(BuildContext context) {
     Navigator.pushNamed(context, Routes.transactionsRoute);
+  }
+
+  _onPressedFilterButton(BuildContext context) {
+    // showModalBottomSheet(
+    //   context: context,
+    //   showDragHandle: true,
+    //   useSafeArea: true,
+    //   builder: (_) => const ProductsFilterBottomSheet(),
+    // );
   }
 }
