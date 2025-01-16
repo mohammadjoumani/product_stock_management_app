@@ -19,10 +19,10 @@ class ItemProduct extends StatelessWidget {
         child: Row(
           children: [
             Expanded(child: _itemCell(product.id.toString())),
-            Expanded(child: _itemCell(product.name)),
+            Expanded(child: _itemCell(product.name ?? '')),
             Expanded(child: _itemCell(product.price.toString())),
             Expanded(child: _itemCell(product.quantity.toString())),
-            Expanded(child: _itemCell(_stockText(product.status))),
+            Expanded(child: _itemCell(_stockText(product.status!))),
           ],
         ),
       ),
@@ -54,7 +54,7 @@ class ItemProduct extends StatelessWidget {
   }
 
   Color _stockBackgroundColor() {
-    switch (product.status) {
+    switch (product.status!) {
       case ProductStatus.inStock:
         return Colors.transparent;
       case ProductStatus.outStock:
@@ -65,7 +65,7 @@ class ItemProduct extends StatelessWidget {
   }
 
   Color _stockTextColor() {
-    switch (product.status) {
+    switch (product.status!) {
       case ProductStatus.inStock:
         return colorOnBackgroundCard;
       case ProductStatus.outStock:

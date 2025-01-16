@@ -29,8 +29,7 @@ class ProductRepository {
     try {
       final db = await _dbHelper.database;
       final result = await db.query(DatabaseHelper.productTable);
-      print("GetAllProducts: $result");
-      return const Right([]);
+      return Right(Product.fromJsonList(result));
     } catch (error) {
       return const Left('Something went wrong');
     }

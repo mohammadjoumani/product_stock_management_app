@@ -52,7 +52,7 @@ class AddProductButton extends ConsumerWidget {
   _handleStateChange(BuildContext context, WidgetRef ref) {
     final state = ref.read(addProductViewmodelProvider);
     if (state.addProductDataState == GenericDataState.success) {
-      Navigator.pop(context);
+      Navigator.pop(context, true);
       showMessage(
         context: context,
         message: 'Success',
